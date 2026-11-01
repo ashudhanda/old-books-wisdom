@@ -163,12 +163,12 @@
       <div class="controls">
         <div class="wrap control-row">
           <div class="filters" role="group" aria-label="Filter by theme">
-            <button class="filter active" data-filter="all">All 30</button>
-            <button class="filter" data-filter="mind">Mind</button>
-            <button class="filter" data-filter="focus">Focus</button>
-            <button class="filter" data-filter="habit">Consistency</button>
-            <button class="filter" data-filter="desire">Distraction</button>
-            <button class="filter" data-filter="failure">Failure</button>
+            <button class="filter active" data-filter="all" aria-pressed="true">All 30</button>
+            <button class="filter" data-filter="mind" aria-pressed="false">Mind</button>
+            <button class="filter" data-filter="focus" aria-pressed="false">Focus</button>
+            <button class="filter" data-filter="habit" aria-pressed="false">Consistency</button>
+            <button class="filter" data-filter="desire" aria-pressed="false">Distraction</button>
+            <button class="filter" data-filter="failure" aria-pressed="false">Failure</button>
           </div>
           <label class="search"><input id="search" type="search" placeholder="Search a book or idea" aria-label="Search teachings"></label>
         </div>
@@ -339,7 +339,7 @@
     document.getElementById('empty').style.display=visible?'none':'block';
   }
   let active='all'; render(active,'');
-  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));this.classList.add('active');active=this.dataset.filter;render(active,document.getElementById('search').value.trim().toLowerCase())}));
+  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});this.classList.add('active');this.setAttribute('aria-pressed','true');active=this.dataset.filter;render(active,document.getElementById('search').value.trim().toLowerCase())}));
   document.getElementById('search').addEventListener('input',e=>render(active,e.target.value.trim().toLowerCase()));
   const mythList=document.getElementById('mythList');
   myths.forEach((m,i)=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener">Check the source ↗</a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
