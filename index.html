@@ -323,6 +323,9 @@
     }
     return hinglish[item.book];
   }
+  // Search matches across book, quote, student takeaway AND the Hinglish
+  // explanation, so a Hinglish search term (e.g. "aadatein") finds its card
+  // even though the visible English text contains no such word.
   const teachings=document.getElementById('teachings');
   function render(active,term){
     teachings.innerHTML=''; let visible=0;
