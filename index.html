@@ -342,7 +342,7 @@
   document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});this.classList.add('active');this.setAttribute('aria-pressed','true');active=this.dataset.filter;render(active,document.getElementById('search').value.trim().toLowerCase())}));
   document.getElementById('search').addEventListener('input',e=>render(active,e.target.value.trim().toLowerCase()));
   const mythList=document.getElementById('mythList');
-  myths.forEach((m,i)=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener">Check the source ↗</a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
+  myths.forEach((m,i)=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener">Check the source ↗</a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
 })();
 </script>
 </body>
