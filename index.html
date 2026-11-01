@@ -313,6 +313,10 @@
     ["Unverified","“The greatest discovery of my generation…” — William James","Quotation aggregators supply no traceable book, essay, or lecture.","https://www.quotationspage.com/quote/1971.html"],
     ["Wrong author","“He who conquers himself is the mightiest warrior.” — Confucius","The source is Laozi, Tao Te Ching 33; Legge writes, “He who overcomes himself is mighty.”","https://tao-in-you.com/lao-tzu-tao-te-ching-chapter-33/"]
   ];
+  // Two items share the book key "William James, Ch. IV", but their Hinglish
+  // lines differ: the generic map entry matches the "Never suffer an exception"
+  // habit item, while the special case below matches the "great thing in all
+  // education" item. Keep both in sync if either quote changes.
   function getHinglish(item){
     if(item.book==="William James · Principles of Psychology, Ch. IV"&&item.q.startsWith("The great thing")){
       return "Aisi aadatein banao jisse sahi kaam karna har din thoda aasaan ho. Tab nervous system tumhare against nahi, tumhare saath kaam karega.";
