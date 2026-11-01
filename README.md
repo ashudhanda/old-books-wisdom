@@ -7,3 +7,11 @@ Includes a **truth-check section** exposing 32 famous-but-misattributed quotes w
 **Live:** https://ashudhanda.github.io/old-books-wisdom/
 
 Built with research-backed, source-traced passages. Every teaching carries its exact source (book, chapter/verse/sutra number).
+
+## How it works
+
+The whole site is a single `index.html` — no build step, no dependencies.
+
+- **Library:** the 30 teachings are grouped into five themes (Mind, Focus, Consistency, Distraction, Failure — six each) and filtered with the theme buttons.
+- **Search:** matches across the book, the quote, the student takeaway, and the Hinglish explanation, so a Hinglish word finds its card too.
+- **Truth-check:** the 32 doubtful attributions are labelled Paraphrase, Fake, Unverified, Disputed, Modern, or similar, each with the reason it fails the source check and a source link where one exists.
