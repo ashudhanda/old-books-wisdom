@@ -338,7 +338,7 @@
       sec.innerHTML='<div class="theme-title"><span class="num">'+themes[key][0]+'</span><h3>'+themes[key][1]+'</h3></div><div class="cards"></div>';
       const grid=sec.querySelector('.cards');
       rows.forEach(x=>{
-        const a=x.url?'<a href="'+x.url+'" target="_blank" rel="noopener">'+x.src+' ↗</a>':'<span>'+x.src+'</span>';
+        const a=x.url?'<a href="'+x.url+'" target="_blank" rel="noopener" aria-label="'+x.src+' (opens in new tab)">'+x.src+' <span aria-hidden="true">↗</span></a>':'<span>'+x.src+'</span>';
         const el=document.createElement('article');el.className='wisdom';
         el.innerHTML='<div class="card-top"><span class="book">'+x.book+'</span><span class="verified">Source-traced</span></div><blockquote>“'+x.q+'”</blockquote><div class="takeaway"><b>For a student:</b> '+x.take+(x.note?'<br><small><b>Translation note:</b> '+x.note+'</small>':'')+'</div><div class="hinglish" lang="hi-Latn"><b>Hinglish mein:</b> '+getHinglish(x)+'</div><div class="source-row"><span>Source</span>'+a+'</div>';
         grid.appendChild(el);
@@ -355,7 +355,7 @@
   document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});this.classList.add('active');this.setAttribute('aria-pressed','true');active=this.dataset.filter;render(active,document.getElementById('search').value.trim().toLowerCase())}));
   document.getElementById('search').addEventListener('input',e=>render(active,e.target.value.trim().toLowerCase()));
   const mythList=document.getElementById('mythList');
-  myths.forEach((m,i)=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener">Check the source ↗</a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
+  myths.forEach((m,i)=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener" aria-label="Check the source (opens in new tab)">Check the source <span aria-hidden="true">↗</span></a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
 })();
 </script>
 </body>
