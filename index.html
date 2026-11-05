@@ -321,7 +321,9 @@
     if(item.book==="William James · Principles of Psychology, Ch. IV"&&item.q.startsWith("The great thing")){
       return "Aisi aadatein banao jisse sahi kaam karna har din thoda aasaan ho. Tab nervous system tumhare against nahi, tumhare saath kaam karega.";
     }
-    return hinglish[item.book];
+    // Unknown book key -> "" instead of undefined, so the card never
+    // prints "undefined" and a search never matches that literal word.
+    return hinglish[item.book]||"";
   }
   // Search matches across book, quote, student takeaway AND the Hinglish
   // explanation, so a Hinglish search term (e.g. "aadatein") finds its card
