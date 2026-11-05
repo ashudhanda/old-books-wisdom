@@ -15,3 +15,16 @@ The whole site is a single `index.html` — no build step, no dependencies.
 - **Library:** the 30 teachings are grouped into five themes (Mind, Focus, Consistency, Distraction, Failure — six each) and filtered with the theme buttons.
 - **Search:** matches across the book, the quote, the student takeaway, and the Hinglish explanation, so a Hinglish word finds its card too.
 - **Truth-check:** the 32 doubtful attributions are labelled Paraphrase, Fake, Unverified, Disputed, Modern, or similar, each with the reason it fails the source check and a source link where one exists.
+
+## Data shape
+
+Each teaching in `index.html` is one object in the `items` array:
+
+- `t` — theme key: `mind`, `focus`, `habit`, `desire`, or `failure`
+- `book` — book plus location, e.g. `Bhagavad Gita 2.47`
+- `q` — the source-traced quotation
+- `take` — the student takeaway in plain English
+- `src` / `url` — named translation or edition, plus its source link (no `url` when there is no link)
+- `note` — optional translation note, shown under the takeaway
+
+Every teaching also needs a Hinglish line in the `hinglish` map, keyed by `book` — except the second William James Ch. IV item, which `getHinglish` special-cases because both items share one book key. Truth-check entries live in the `myths` array as `[status, quote, reason, source-link]`.
