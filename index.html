@@ -216,6 +216,10 @@
   </footer>
 
 <script>
+// Single-page app, no build step: the tables below (themes, hinglish,
+// items, myths) are the whole data model. render() rebuilds the library
+// from the active theme filter plus the search term; the truth-check
+// list is rendered once from myths. Keep the tables and render() in sync.
 (function(){
   const themes={
     mind:["I","How the mind works"],focus:["II","Focus and attention"],habit:["III","Consistency and habit"],desire:["IV","Distraction and desire"],failure:["V","Failure and perseverance"]
