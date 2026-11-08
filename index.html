@@ -375,7 +375,7 @@
   // Escape clears the search and shows the full library again.
   document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Escape'&&e.target.value){e.target.value='';render(active,'');}});
   const mythList=document.getElementById('mythList');
-  myths.forEach((m,i)=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener" aria-label="Check the source (opens in new tab)">Check the source <span aria-hidden="true">↗</span></a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
+  myths.forEach(m=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener" aria-label="Check the source (opens in new tab)">Check the source <span aria-hidden="true">↗</span></a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
 })();
 </script>
 </body>
