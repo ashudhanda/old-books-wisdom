@@ -363,6 +363,11 @@
   // Derive the "All N" label from the data instead of hard-coding 30, so
   // adding or removing a teaching cannot leave a stale count on the button.
   document.querySelector('.filter[data-filter="all"]').textContent='All '+items.length;
+  // Same for the theme buttons, so "Mind (6)" can never drift from the data.
+  Object.keys(themes).forEach(key=>{
+    const btn=document.querySelector('.filter[data-filter="'+key+'"]');
+    if(btn)btn.textContent=btn.textContent.trim()+' ('+items.filter(x=>x.t===key).length+')';
+  });
   render(active,'');
   document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});this.classList.add('active');this.setAttribute('aria-pressed','true');active=this.dataset.filter;render(active,document.getElementById('search').value.trim().toLowerCase())}));
   document.getElementById('search').addEventListener('input',e=>render(active,e.target.value.trim().toLowerCase()));
