@@ -14,7 +14,7 @@ The whole site is a single `index.html` — no build step, no dependencies.
 
 - **Library:** the 30 teachings are grouped into five themes (Mind, Focus, Consistency, Distraction, Failure — six each) and filtered with the theme buttons.
 - **Search:** matches across the book, the quote, the student takeaway, and the Hinglish explanation, so a Hinglish word finds its card too.
-- **Truth-check:** the 32 doubtful attributions are labelled Paraphrase, Fake, Unverified, Disputed, Modern, or similar, each with the reason it fails the source check and a source link where one exists.
+- **Truth-check:** the 32 doubtful attributions are labelled Paraphrase, Fake, Unverified, Unknown, Disputed, Modern, Not a verse, Not translation, or Wrong author, each with the reason it fails the source check and a source link where one exists.
 
 ## Data shape
 
