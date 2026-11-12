@@ -356,7 +356,8 @@
       rows.forEach(x=>{
         const a=x.url?'<a href="'+x.url+'" target="_blank" rel="noopener" aria-label="'+x.src+' (opens in new tab)">'+x.src+' <span aria-hidden="true">↗</span></a>':'<span>'+x.src+'</span>';
         const el=document.createElement('article');el.className='wisdom';
-        el.innerHTML='<div class="card-top"><span class="book">'+x.book+'</span><span class="verified">Source-traced</span></div><blockquote>“'+x.q+'”</blockquote><div class="takeaway"><b>For a student:</b> '+x.take+(x.note?'<br><small><b>Translation note:</b> '+x.note+'</small>':'')+'</div><div class="hinglish" lang="hi-Latn"><b>Hinglish mein:</b> '+getHinglish(x)+'</div><div class="source-row"><span>Source</span>'+a+'</div>';
+        const hl=getHinglish(x);
+        el.innerHTML='<div class="card-top"><span class="book">'+x.book+'</span><span class="verified">Source-traced</span></div><blockquote>“'+x.q+'”</blockquote><div class="takeaway"><b>For a student:</b> '+x.take+(x.note?'<br><small><b>Translation note:</b> '+x.note+'</small>':'')+'</div>'+(hl?'<div class="hinglish" lang="hi-Latn"><b>Hinglish mein:</b> '+hl+'</div>':'')+'<div class="source-row"><span>Source</span>'+a+'</div>';
         grid.appendChild(el);
       });
       teachings.appendChild(sec);
