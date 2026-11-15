@@ -15,6 +15,8 @@ The whole site is a single `index.html` — no build step, no dependencies.
 - **Library:** the 30 teachings are grouped into five themes (Mind, Focus, Consistency, Distraction, Failure — six each) and filtered with the theme buttons.
 - **Search:** matches across the book, the quote, the student takeaway, the translation note, the named source, and the Hinglish explanation, so a Hinglish word finds its card too — accents are ignored, so “Muller” finds “Müller”.
 - **Truth-check:** the 32 doubtful attributions are labelled Paraphrase, Fake, Unverified, Unknown, Disputed, Modern, Not a verse, Not translation, or Wrong author, each with the reason it fails the source check and a source link where one exists.
+- **Counts:** the hero stats (13 works, 30 passages, 32 attributions), the "All N" filter label, and the per-theme counts are all derived from the `items`/`myths` tables at load, so they can never drift from the data.
+- **Keyboard:** press `/` anywhere to focus the search; `Esc` clears it.
 
 ## Data shape
 
