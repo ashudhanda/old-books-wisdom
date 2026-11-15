@@ -135,7 +135,7 @@
         <div class="stamp">Passages traced to named editions</div>
         <h1>How the old masters trained the mind.</h1>
         <p>Ancient and classic teachings on focus, consistency, desire, and failure — with viral lines separated from source-traced text.</p>
-        <div class="hero-note"><span>13 classic works</span><span>30 sourced passages</span><span>32 doubtful attributions</span><span>Researched 7 Oct 2026</span></div>
+        <div class="hero-note"><span id="stat-works">13 classic works</span><span id="stat-passages">30 sourced passages</span><span id="stat-myths">32 doubtful attributions</span><span>Researched 7 Oct 2026</span></div>
       </div>
     </div>
   </header>
@@ -372,6 +372,14 @@
     const btn=document.querySelector('.filter[data-filter="'+key+'"]');
     if(btn)btn.textContent=btn.textContent.trim()+' ('+items.filter(x=>x.t===key).length+')';
   });
+  // The hero stats come from the same tables, so "13 classic works / 30
+  // sourced passages / 32 doubtful attributions" can never drift from the
+  // data. A "work" is the book name with its chapter/verse location
+  // stripped: "Bhagavad Gita 2.47" and "Bhagavad Gita 6.34–35" are one
+  // work, as are the two Meditations entries filed under Marcus Aurelius.
+  function workOf(book){return book.split(' · ')[0].replace(/\s+\d[\d.\-–—,\s]*$/,'').trim();}
+  const works=new Set(items.map(x=>workOf(x.book)));
+  [['stat-works',works.size+' classic works'],['stat-passages',items.length+' sourced passages'],['stat-myths',myths.length+' doubtful attributions']].forEach(([id,text])=>{const el=document.getElementById(id);if(el)el.textContent=text;});
   render(active,'');
   document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});this.classList.add('active');this.setAttribute('aria-pressed','true');active=this.dataset.filter;render(active,fold(document.getElementById('search').value.trim()))}));
   document.getElementById('search').addEventListener('input',e=>render(active,fold(e.target.value.trim())));
