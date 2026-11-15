@@ -330,6 +330,10 @@
   // lines differ: the generic map entry matches the "Never suffer an exception"
   // habit item, while the special case below matches the "great thing in all
   // education" item. Keep both in sync if either quote changes.
+  // One builder for every link that opens a new tab, so the rel/target
+  // attributes and the "(opens in new tab)" label can never drift between
+  // the library cards and the truth-check list.
+  function externalLink(href,label){return '<a href="'+href+'" target="_blank" rel="noopener" aria-label="'+label+' (opens in new tab)">'+label+' <span aria-hidden="true">↗</span></a>';}
   function getHinglish(item){
     if(item.book==="William James · Principles of Psychology, Ch. IV"&&item.q.startsWith("The great thing")){
       return "Aisi aadatein banao jisse sahi kaam karna har din thoda aasaan ho. Tab nervous system tumhare against nahi, tumhare saath kaam karega.";
@@ -353,7 +357,7 @@
       sec.innerHTML='<div class="theme-title"><span class="num">'+themes[key][0]+'</span><h3>'+themes[key][1]+'</h3></div><div class="cards"></div>';
       const grid=sec.querySelector('.cards');
       rows.forEach(x=>{
-        const a=x.url?'<a href="'+x.url+'" target="_blank" rel="noopener" aria-label="'+x.src+' (opens in new tab)">'+x.src+' <span aria-hidden="true">↗</span></a>':'<span>'+x.src+'</span>';
+        const a=x.url?externalLink(x.url,x.src):'<span>'+x.src+'</span>';
         const el=document.createElement('article');el.className='wisdom';
         const hl=getHinglish(x);
         el.innerHTML='<div class="card-top"><span class="book">'+x.book+'</span><span class="verified">Source-traced</span></div><blockquote>“'+x.q+'”</blockquote><div class="takeaway"><b>For a student:</b> '+x.take+(x.note?'<br><small><b>Translation note:</b> '+x.note+'</small>':'')+'</div>'+(hl?'<div class="hinglish" lang="hi-Latn"><b>Hinglish mein:</b> '+hl+'</div>':'')+'<div class="source-row"><span>Source</span>'+a+'</div>';
@@ -386,7 +390,7 @@
   // Escape clears the search and shows the full library again.
   document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Escape'&&e.target.value){e.target.value='';render(active,'');}});
   const mythList=document.getElementById('mythList');
-  myths.forEach(m=>{const d=document.createElement('details');const link=m[3]?'<br><a href="'+m[3]+'" target="_blank" rel="noopener" aria-label="Check the source (opens in new tab)">Check the source <span aria-hidden="true">↗</span></a>':'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
+  myths.forEach(m=>{const d=document.createElement('details');const link=m[3]?'<br>'+externalLink(m[3],'Check the source'):'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
 })();
 </script>
 </body>
