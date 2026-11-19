@@ -396,8 +396,9 @@
   render(active,'');
   document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});this.classList.add('active');this.setAttribute('aria-pressed','true');active=this.dataset.filter;render(active,fold(document.getElementById('search').value.trim()))}));
   document.getElementById('search').addEventListener('input',e=>render(active,fold(e.target.value.trim())));
-  // Escape clears the search and shows the full library again.
-  document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Escape'&&e.target.value){e.target.value='';render(active,'');}});
+  // Escape clears the search and shows the full library again; with an
+  // empty search it moves focus back to the page instead of doing nothing.
+  document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Escape'){if(e.target.value){e.target.value='';render(active,'');}else{e.target.blur();}}});
   // "/" focuses the search from anywhere on the page, unless the user is
   // already typing in a field (where "/" is just a character).
   document.addEventListener('keydown',e=>{const tag=(document.activeElement||{}).tagName;if(e.key==='/'&&tag!=='INPUT'&&tag!=='TEXTAREA'&&!e.ctrlKey&&!e.metaKey){e.preventDefault();document.getElementById('search').focus();}});
