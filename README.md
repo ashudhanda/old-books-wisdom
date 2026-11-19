@@ -27,6 +27,7 @@ Each teaching in `index.html` is one object in the `items` array:
 - `q` — the source-traced quotation
 - `take` — the student takeaway in plain English
 - `src` / `url` — named translation or edition, plus its source link (no `url` when there is no link)
+- `url` — two source links stay `http://` on purpose: satyananda.eu and nothingistic.org do not serve HTTPS (checked 2026-11-19), so upgrading them breaks the links.
 - `note` — optional translation note, shown under the takeaway
 
 Every teaching also needs a Hinglish line in the `hinglish` map, keyed by `book` — except the second William James Ch. IV item, which `getHinglish` special-cases because both items share one book key. Truth-check entries live in the `myths` array as `[status, quote, reason, source-link]`.
