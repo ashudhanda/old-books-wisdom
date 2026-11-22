@@ -404,8 +404,9 @@
   // empty search it moves focus back to the page instead of doing nothing.
   document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Escape'){if(e.target.value){e.target.value='';render(active,'');}else{e.target.blur();}}});
   // "/" focuses the search from anywhere on the page, unless the user is
-  // already typing in a field (where "/" is just a character).
-  document.addEventListener('keydown',e=>{const tag=(document.activeElement||{}).tagName;if(e.key==='/'&&tag!=='INPUT'&&tag!=='TEXTAREA'&&!e.ctrlKey&&!e.metaKey){e.preventDefault();document.getElementById('search').focus();}});
+  // already typing in a field or an editable region (where "/" is just
+  // a character).
+  document.addEventListener('keydown',e=>{const ae=document.activeElement||{};if(e.key==='/'&&ae.tagName!=='INPUT'&&ae.tagName!=='TEXTAREA'&&!ae.isContentEditable&&!e.ctrlKey&&!e.metaKey){e.preventDefault();document.getElementById('search').focus();}});
   const mythList=document.getElementById('mythList');
   myths.forEach(m=>{const d=document.createElement('details');const link=m[3]?'<br>'+externalLink(m[3],'Check the source'):'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
 })();
