@@ -337,8 +337,10 @@
   // education" item. Keep both in sync if either quote changes.
   // One builder for every link that opens a new tab, so the rel/target
   // attributes and the "(opens in new tab)" label can never drift between
-  // the library cards and the truth-check list.
-  function externalLink(href,label){return '<a href="'+href+'" target="_blank" rel="noopener" aria-label="'+label+' (opens in new tab)">'+label+' <span aria-hidden="true">↗</span></a>';}
+  // the library cards and the truth-check list. The optional third
+  // argument overrides the accessible name when the visible label is
+  // the same on many links (the truth-check "Check the source" links).
+  function externalLink(href,label,aria){return '<a href="'+href+'" target="_blank" rel="noopener" aria-label="'+(aria||label)+' (opens in new tab)">'+label+' <span aria-hidden="true">↗</span></a>';}
   // Hinglish line for a teaching, keyed by its book string. The two
   // William James Ch. IV items share one book key, so the second one is
   // matched on its opening words instead; anything unkeyed returns ""
@@ -409,7 +411,11 @@
   // a character).
   document.addEventListener('keydown',e=>{const ae=document.activeElement||{};if(e.key==='/'&&ae.tagName!=='INPUT'&&ae.tagName!=='TEXTAREA'&&!ae.isContentEditable&&!e.ctrlKey&&!e.metaKey){e.preventDefault();document.getElementById('search').focus();}});
   const mythList=document.getElementById('mythList');
-  myths.forEach(m=>{const d=document.createElement('details');const link=m[3]?'<br>'+externalLink(m[3],'Check the source'):'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
+  // The visible text is "Check the source" on every truth-check link,
+  // so the accessible name carries the quote itself (cut at a word
+  // boundary) — otherwise a screen reader hears 26 identical links.
+  function mythLabel(m){if(m[1].length<=70)return 'Check the source for '+m[1];const cut=m[1].slice(0,70);const q=(/\s/.test(m[1][70])||/\s$/.test(cut))?cut.trimEnd():cut.replace(/\s\S*$/,'');return 'Check the source for '+q+'…';}
+  myths.forEach(m=>{const d=document.createElement('details');const link=m[3]?'<br>'+externalLink(m[3],'Check the source',mythLabel(m)):'';d.innerHTML='<summary><span class="status">'+m[0]+'</span><span class="myth-q">'+m[1]+'</span><span class="plus" aria-hidden="true">+</span></summary><div class="myth-body">'+m[2]+link+'</div>';mythList.appendChild(d)});
 })();
 </script>
 </body>
